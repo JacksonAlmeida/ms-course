@@ -13,7 +13,7 @@ import com.sunflower.hrworker.DTO.WorkerDTO;
 import com.sunflower.hrworker.services.WorkerService;
 
 @RestController
-@RequestMapping(value = "/api/hr-worker/workers")
+@RequestMapping(value = "/workers")
 public class WorkerResource {
 
 	@Autowired
