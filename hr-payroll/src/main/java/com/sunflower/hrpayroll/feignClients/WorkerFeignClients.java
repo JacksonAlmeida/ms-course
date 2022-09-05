@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.sunflower.hrpayroll.entities.WorkerDTO;
 
 @Component
-@FeignClient(name = "hr-worker", url = "http://10.0.0.110:8001", path = "/workers")
+@FeignClient(name = "hr-worker", /*url = "lb://hr-worker",*/ path = "/workers")
 public interface WorkerFeignClients {
 
 	@GetMapping(value = "/{id}")

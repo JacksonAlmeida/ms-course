@@ -9,8 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import io.netty.handler.codec.http.HttpMethod;
-
 @EnableEurekaClient
 @SpringBootApplication
 public class HrApiGatewayApplication {
@@ -22,20 +20,20 @@ public class HrApiGatewayApplication {
 	@Bean
 	public RouteLocator myRoute( RouteLocatorBuilder builder) {
 		return builder.routes().route(
-				x -> x.host("*.sunflower.com")
+				"hr-worker", x -> x.host("*.sunflower.com")
 				.and()
 				.path("/workers/**")
-				.uri("http://localhost:8001")
+				.uri("lb://hr-worker")
 				)
 				.route(
 				x -> x.path("/payments/**")
-				.uri("http://localhost:61932"))
+				.uri("lb://hr-payroll"))
 				.route(
 				x -> x.host("*.circuitbreack.com")
 				.filters( f -> f.circuitBreaker(config -> config
 						.setName("mycmd")
 						.setFallbackUri("forward:fallback")))
-				.uri("http://localhost:61932"))
+				.uri("lb://hr-payroll"))
 				.build();
 	}
 
