@@ -19,10 +19,14 @@ public class HrApiGatewayApplication {
 	
 	@Bean
 	public RouteLocator myRoute( RouteLocatorBuilder builder) {
-		return builder.routes().route(
-				"hr-worker", x -> x.host("*.sunflower.com")
-				.and()
-				.path("/workers/**")
+		return builder.routes()
+				.route(
+				x -> x.path("/users/**")
+				.uri("lb://hr-user"))
+				.route(
+//				x -> x.host("*.sunflower.com")
+//				.and()
+				x -> x.path("/workers/**")
 				.uri("lb://hr-worker")
 				)
 				.route(
