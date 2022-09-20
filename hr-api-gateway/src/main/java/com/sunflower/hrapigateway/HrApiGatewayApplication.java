@@ -24,8 +24,6 @@ public class HrApiGatewayApplication {
 				x -> x.path("/users/**")
 				.uri("lb://hr-user"))
 				.route(
-//				x -> x.host("*.sunflower.com")
-//				.and()
 				x -> x.path("/workers/**")
 				.uri("lb://hr-worker")
 				)
