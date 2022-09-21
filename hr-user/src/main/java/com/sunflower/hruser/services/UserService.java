@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.sunflower.hruser.dto.UserDTO;
 import com.sunflower.hruser.entities.User;
 import com.sunflower.hruser.repositories.UserRepository;
+import com.sunflower.hruser.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UserService {
@@ -26,8 +27,10 @@ public class UserService {
 		Optional<User> obj = userRepository.findById(id);
 		if (obj.isPresent()) {
 			return obj.stream().map(x -> new UserDTO(x)).findAny().get();
-		} else
-			return null;
+		} else {
+			Optional<UserDTO> dto = Optional.empty();
+			return dto.orElseThrow(() -> new ResourceNotFoundException(id));
+		}
 	}
 
 }
