@@ -21,7 +21,7 @@ public class HrApiGatewayApplication {
 	public RouteLocator myRoute( RouteLocatorBuilder builder) {
 		return builder.routes()
 				.route(
-				x -> x.path("/users/**")
+				x -> x.path("/users/**", "/roles/**")
 				.uri("lb://hr-user"))
 				.route(
 				x -> x.path("/workers/**")

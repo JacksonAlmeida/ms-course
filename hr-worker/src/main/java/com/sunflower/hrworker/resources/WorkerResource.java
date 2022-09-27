@@ -55,7 +55,7 @@ public class WorkerResource {
 	}
 	
 	@PutMapping(value = "/updateworker/{id}")
-	public ResponseEntity<Void> update(long id, Worker obj){
+	public ResponseEntity<Void> update(@PathVariable long id, @RequestBody Worker obj){
 		obj = workerService.update(id, obj);
 		return ResponseEntity.ok().build();
 	}
